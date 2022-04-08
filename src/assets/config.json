@@ -1,0 +1,15 @@
+{
+  "title": "dailybreadResearch.github.io",
+  "son": [
+    {
+      "title": "基础研究",
+      "filename": "puzzle.md",
+      "son": [
+        {
+          "title": "相似图像检索",
+          "filename": "puzzle.md"
+        }
+      ]
+    }
+  ]
+}
