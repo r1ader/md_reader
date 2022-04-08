@@ -20,7 +20,6 @@ export default {
 
   mounted() {
     this.get_config()
-    // this.$refs.main.showSider()
   }
 }
 
@@ -30,11 +29,11 @@ export default {
   <div class="header">
     {{ config.label }}
 
-    <img class="learning" :src="import.meta.env.MODE === 'development'?'./assets/logo.png':'./dailybreadResearch.github.io/assets/logo.png'">
+    <img class="learning" src="https://zjustarstar.github.io/dailybreadResearch.github.io/assets/logo.da1a2b98.png">
   </div>
 
   <div class="sideButton" v-on:click="this.$refs.main.showSider()">
-    >
+    <div class="triangle"/>
   </div>
   <Main ref="main" msg="Hello Vue 3 + Vite"/>
 </template>
@@ -52,7 +51,7 @@ body {
   position: fixed;
   left: 0;
   top: 50vh;
-  padding: 40px 10px 40px 10px;
+  padding: 40px 0 40px 10px;
   border-radius: 0 10px 10px 0;
   background: rgba(4, 87, 131, 0.24);
   font-size: 30px;
@@ -60,7 +59,6 @@ body {
 }
 
 .learning {
-  /*width: 50px;*/
   height: 50px;
   position: absolute;
   right: 20px;
@@ -91,6 +89,16 @@ body {
     justify-content: start;
     padding-left: 10px;
   }
+}
+
+.triangle {
+  /*position: absolute;*/
+  display: inline-block;
+  width: 0;
+  height: 0;
+  background-color: white;
+  border: 10px solid;
+  border-color: rgba(4, 87, 131, 0.24) rgba(4, 87, 131, 0.24) rgba(4, 87, 131, 0.24) white;
 }
 
 </style>

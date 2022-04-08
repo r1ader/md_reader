@@ -20,12 +20,29 @@ export default {
     async get_config() {
       const config_raw = await readTextFile('config.json')
       this.config = JSON.parse(config_raw)
+      try {
+        console.log(window.location)
+        const path = window.location.hash.split('#')[1]
+        if (path) {
+          try {
+            const res = await readTextFile(`article/${ path }.md`)
+            this.src = res
+          } catch (e) {
+
+          }
+        } else {
+          await this.handleNodeClick(this.config)
+        }
+      } catch (e) {
+        await this.handleNodeClick(this.config)
+      }
     },
     async handleNodeClick(data) {
       if (!data['filename']) return
       try {
         const res = await readTextFile('article/' + data['filename'])
         this.src = res
+        window.location = `#${ data['filename'].replace('.md', '') }`
       } catch (e) {
 
       }
@@ -43,13 +60,13 @@ export default {
   mounted() {
     this.get_config()
     marked.setOptions({
-      highlight: function(code) {
+      highlight: function (code) {
         return hljs.highlightAuto(code).value;
       }
     });
   },
   computed: {
-    markdownToHtml(){
+    markdownToHtml() {
       return marked(this.src);
     }
   }
