@@ -1,8 +1,7 @@
 <script>
-
-import { onMounted, ref } from "vue";
 import VueMarkdown from 'vue-markdown-render'
 import { readTextFile } from '../util/network.js'
+import { marked } from 'marked';
 
 export default {
   data: function () {
@@ -26,7 +25,6 @@ export default {
       if (!data['filename']) return
       try {
         const res = await readTextFile('article/' + data['filename'])
-        console.log(res)
         this.src = res
       } catch (e) {
 
@@ -44,6 +42,16 @@ export default {
   },
   mounted() {
     this.get_config()
+    marked.setOptions({
+      highlight: function(code) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+  },
+  computed: {
+    markdownToHtml(){
+      return marked(this.src);
+    }
   }
 }
 </script>
@@ -53,7 +61,7 @@ export default {
       <el-tree :data="config.children" :props="defaultProps" @node-click="handleNodeClick"/>
     </div>
     <div v-on:click="hideSider" class="content">
-      <VueMarkdown :source="src"/>
+      <div v-html="markdownToHtml"/>
     </div>
   </div>
 </template>
@@ -71,7 +79,8 @@ a {
 }
 
 .nav {
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background-color: white;
   padding: 10px;
   min-width: 300px;

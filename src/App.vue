@@ -28,7 +28,7 @@ export default {
 
 <template>
   <div class="header">
-    {{ config.label && config.label.split('.').shift() }}
+    {{ config.label }}
 
     <img class="learning" src="./assets/logo.png">
   </div>
