@@ -30,7 +30,7 @@ export default {
   <div class="header">
     {{ config.label }}
 
-    <img class="learning" src="./assets/logo.png">
+    <img class="learning" :src="import.meta.env.MODE === 'development'?'./assets/logo.png':'./dailybreadResearch.github.io/assets/logo.png'">
   </div>
 
   <div class="sideButton" v-on:click="this.$refs.main.showSider()">
